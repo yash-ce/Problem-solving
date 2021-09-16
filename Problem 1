@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n;
+	cin>>n;
+	
+	int a[n];
+	for(int i=0;i<n;i++){
+		cin>>a[i];
+	}
+	
+	int even[n];
+	int odd[n];
+	int id1 = 0;
+	int id2 = 0;
+	
+	for(int i=0;i<n;i++){
+		if(i%2 == 0){
+			even[id1++] = a[i];
+		}
+		else{
+			odd[id2++] = a[i];
+		}
+	}
+	
+	for(int i=0;i<id1;i++){
+		for(int j=i;j<id1;j++){
+			if(even[i] > even[j]){
+				int temp = even[i];
+				even[i] = even[j];
+				even[j] = temp;
+			}
+		}
+	}
+	
+	for(int i=0;i<id2;i++){
+		for(int j=i;j<id2;j++){
+			if(odd[i] > odd[j]){
+				int temp = odd[i];
+				odd[i] = odd[j];
+				odd[j] = temp;
+			}
+		}
+	}
+	
+	// for(int i=0;i<id1;i++){
+	// 	cout<<even[i]<<" ";
+	// }
+	// cout<< "\nodd "<<endl;
+	// for(int i=0;i<id2;i++){
+	// 	cout<<odd[i]<<" ";
+	// }
+	
+	int sum = even[id1-2]+odd[id2-2];
+	cout<<"sum->"<<sum<<endl;
+	
+	
+	return 0;
+}
