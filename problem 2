@@ -1,0 +1,28 @@
+n1 = int(input())
+n2 = int(input())
+# print("num1", n1)
+# print("num2",n2)
+l1 = len(str(n1))
+l2 = len(str(n2))
+# print("len1", l1)
+# print("len2",l2)
+s = 0
+if n1 < n2:
+	s = n1
+else:
+	s = n2
+	
+# print(s)
+c = 0
+while s > 0:
+	rem1 = s%10
+	s = s//10
+	rem2 = n2%10
+	n2 = n2//10
+	# print(rem1)
+	# print(rem2)
+	if rem1+rem2 > 9:
+		c+=1
+	
+	
+print( c)
