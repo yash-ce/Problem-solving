@@ -1,0 +1,72 @@
+#include <iostream>
+#include <array>
+using namespace std;
+void bubble_sort(int*, int);
+void selection_sort(int*, int);
+void insertion_sort(int*, int);
+int main(void) {
+	// your code goes here
+	
+	int a[] = {1, 4, 56, 54, 2, 14, 2, 89, 43};
+	int n = 9;
+	cout<<"Bubble Sort\n";
+	bubble_sort(a, n);
+	cout<<"\nSelection Sort\n";
+	selection_sort(a, n);
+	cout<<"\nInsertion Sort\n";
+	insertion_sort(a, n);
+	cout<<"\n";
+		for(int i=0;i<n;i++){
+		cout<<a[i]<< " ";
+	}
+	return 0;
+}
+
+void insertion_sort(int* a, int n){
+	for(int i=1;i<n;i++){
+		int curr = a[i];
+		int j = i-1;
+		while(j >= 0 && a[j] > curr){
+			a[j+1] = a[j];
+			j--;
+		}
+		a[j+1] = curr;
+	}
+}
+
+void selection_sort(int* a, int n){
+	int minIndex =0 , temp = 0;
+	for(int i=0;i<n;i++){
+		minIndex = i;
+		for(int j=i+1;j<n;j++){
+			if(a[j] < a[minIndex]){
+				minIndex = j;
+			}
+		}
+		temp = a[minIndex];
+		a[minIndex] = a[i];
+		a[i] = temp;
+	}
+	cout<<"\n";
+		for(int i=0;i<n;i++){
+		cout<<a[i]<< " ";
+	}
+}
+
+void bubble_sort(int* a, int n){
+	for(int i=0;i<n;i++){
+		for(int j=i;j<n;j++){
+			if(a[j] < a[i]){
+				int temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+		}
+		
+		
+	}
+	
+	for(int i=0;i<n;i++){
+		cout<<a[i]<< " ";
+	}
+}
