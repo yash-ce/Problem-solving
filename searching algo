@@ -1,0 +1,182 @@
+// https://ideone.com/VJ8lSl
+
+#include <iostream>
+using namespace std;
+
+void bubble_sort(int*, int);
+void insertion_sort(int*, int);
+void selection_sort(int*, int);
+int partion(int*, int, int);
+void quick_sort(int*, int, int);
+void merge_sort(int*, int, int);
+void merge(int*, int, int, int);
+
+int main() {
+	// your code goes here
+	int a[] = {9,  5, 4, 3, 2, 5, 2, 6, 7, 8};
+	int n = 10;
+	cout<<"Buuble Sort\n";
+	merge_sort(a, 0, 9);
+	cout<<"IO";
+	for(int i=0;i<n;i++){
+		cout<<a[i]<<" ";
+	}cout<<"\nSelection Sort\n";
+	// selection_sort(a, n);
+	// for(int i=0;i<n;i++){
+	// 	cout<<a[i]<<" ";
+	// }
+	// cout<<"\nInsertion Sort\n";
+	// insertion_sort(a, n);
+	// for(int i=0;i<n;i++){
+	// 	cout<<a[i]<<" ";
+	// }
+	return 0;
+}
+
+// void merge(int *array, int l, int m, int r) {
+//   int i, j, k, nl, nr;
+//   //size of left and right sub-arrays
+//   nl = m-l+1; nr = r-m;
+//   int larr[nl], rarr[nr];
+//   //fill left and right sub-arrays
+//   for(i = 0; i<nl; i++)
+//       larr[i] = array[l+i];
+//   for(j = 0; j<nr; j++)
+//       rarr[j] = array[m+1+j];
+//   i = 0; j = 0; k = l;
+//   //marge temp arrays to real array
+//   while(i < nl && j<nr) {
+//       if(larr[i] <= rarr[j]) {
+//          array[k] = larr[i];
+//          i++;
+//       }else{
+//          array[k] = rarr[j];
+//          j++;
+//       }
+//       k++;
+//   }
+//   while(i<nl) {       //extra element in left array
+//       array[k] = larr[i];
+//       i++; k++;
+//   }
+//   while(j<nr) {     //extra element in right array
+//       array[k] = rarr[j];
+//       j++; k++;
+//   }
+// }
+void merge(int* a, int l, int m, int n){
+	int n1 = m-l+1;
+	int n2 = n-m;
+	
+	int L[n1], R[n2];
+	for(int i=0;i<n1;i++){
+		L[i] = a[l+i];
+	}
+	for(int j=0;j<n2;j++){
+		R[j] = a[j+m+1];
+	}
+	
+	int i=0,j=0,k=l;
+	while(i < n1 && j < n2){
+		if(L[i] < R[j]){
+			a[k] = L[i];
+			i++;
+		}
+		else{
+			a[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+	
+	while(i < n1){
+		a[k] = L[i];
+		i++;
+		k++;
+	}
+	while(j < n2){
+		a[k] = R[j];
+		j++;
+		k++;
+	}
+	
+	
+}
+void merge_sort(int* a, int l, int n){
+	if(l < n){
+
+	
+		int mid = (l+n)/2;
+		merge_sort(a, l, mid);
+		merge_sort(a, mid+1, n);
+		merge(a, l, mid, n);
+}
+	
+}
+
+int partion(int* a, int l, int n){
+	int pivot = a[n];
+	int pindex = l;
+	int temp = 0;
+	for(int i=l;i<n;i++){
+		if(a[i] <= pivot){
+			temp = a[i];
+			a[i] = a[pindex];
+			a[pindex] = temp;
+			pindex++;
+		}
+	}
+	
+	temp = a[pindex];
+	a[pindex] = a[n];
+	a[n] = temp;
+	return pindex;
+}
+void quick_sort(int* a, int l, int n){
+	if(l < n){
+		// int mid = (l+n)/2;
+		cout<<"Ya ";
+		int mid = partion(a, l, n);
+		quick_sort(a, l, mid-1);
+		quick_sort(a, mid+1, n);
+		
+	}
+}
+void bubble_sort(int* a, int n){
+	for(int i=0;i<n;i++){
+		for(int j=i+1;j<n;j++){
+			if(a[j] < a[i]){
+				int temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+		}
+	}
+}
+
+
+void insertion_sort(int* a, int n){
+	for(int i=1;i<n;i++){
+		int j = i-1;
+		int num = a[i];
+		while(j >= 0 && a[j] > num){
+			a[j+1] = a[j];
+			j--;
+		}
+		a[j+1] = a[i];
+	}
+}
+void selection_sort(int* a, int n){
+	for(int i=0;i<n;i++){
+		int minIndex = i;
+		for(int j=i+1;j<n;j++){
+			if(a[j] < a[minIndex]){
+				minIndex = j;
+			}
+		}
+		int temp = a[minIndex];
+		a[minIndex] = a[i];
+		a[i] = temp;
+	}
+}
+
