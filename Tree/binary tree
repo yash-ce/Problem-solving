@@ -1,0 +1,100 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node *left, *right;
+    Node(int data){
+        this->data = data;
+        left = right = NULL;
+    }
+};
+
+void preorder(Node* root){
+    if(root == NULL){
+        return;
+    }
+    cout<<root->data<<" ";
+    preorder(root->left);
+    preorder(root->right);
+
+}
+
+void inorder(Node* root){
+    if(root == NULL){
+        return;
+    }
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+
+void postorder(Node* root){
+    if(root == NULL){
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->data<<" ";
+}
+
+int noOfNodes(Node* root){
+    if(root == NULL){
+        return 0;
+    }
+    return 1+noOfNodes(root->left)+noOfNodes(root->right);
+}
+
+
+int noOfLeafNodes(Node* root){
+    if(root == NULL){
+        return 0;
+    }
+    if(root->left == NULL && root->right == NULL){
+        return 1;
+    }
+    else{
+        return noOfLeafNodes(root->left)+noOfLeafNodes(root->right);
+    }
+
+}
+
+int noOfNonLeafNodes(Node* root){
+    if(root == NULL){
+        return 0;
+    }
+    else if(root->left == NULL && root->right == NULL){
+        return 0;
+    }
+
+    else{
+        return 1+noOfNonLeafNodes(root->left)+noOfNonLeafNodes(root->right);
+    }
+}
+struct Node *root = NULL;
+int main(){
+
+    root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);                                                      
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);    
+    root->right->left = new Node(6);
+    root->right->right = new Node(7);
+    cout<<"Preorder";
+    preorder(root); 
+    cout<<"Postorder";
+    postorder(root);
+    cout<<"Inorder";
+    inorder(root);
+    cout<<"\nNo Of Nodes in the tree-->  ";
+    int n = noOfNodes(root);
+    cout<<n<<"\n";
+    cout<<"No Of Leaf Nodes in the tree-->  ";
+    int n1 = noOfLeafNodes(root);
+    cout<<n1;
+    cout<<"\nNo Of Non Leaf Nodes in the tree-->  ";
+    int n2 = noOfNonLeafNodes(root);
+    cout<<n2;
+    return 0;
+};
