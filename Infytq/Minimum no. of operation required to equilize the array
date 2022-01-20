@@ -1,0 +1,10 @@
+def fun(l) :
+	summ = sum(l)
+	n = len(l)
+	min_ele = min(l)
+	return(summ - (n * min_ele))
+	
+
+l = [1, 2, 3]
+print( "Minimum No. of Operation Required =>", fun(l))
+
